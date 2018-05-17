@@ -1,0 +1,11 @@
+/* pages/register/register.wxss */
+.inputs {
+  margin-bottom: 15px;
+}
+
+.hr {
+  height: 2px;
+  width: 100%;
+  background-color: grey;
+  opacity: 0.2;
+}
