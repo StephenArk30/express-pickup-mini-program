@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: '深大快递代拿',
+    motto: '大学生快递代拿',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -43,10 +43,19 @@ Page({
       })
     }
   },
-  goToRegister: function () {
-    wx.navigateTo({
-      url: '../register/register',
-    })
+  goToPublish: function () {
+    // 判断用户是否注册
+    if (app.globalData.is_regist) {
+      wx.navigateTo({
+        url: '../platform/publish/publish',
+      })
+    }
+    // 否则前往注册
+    else {
+      wx.navigateTo({
+        url: '../register/register',
+      })
+    }
   },
   getUserInfo: function(e) {
     console.log(e)

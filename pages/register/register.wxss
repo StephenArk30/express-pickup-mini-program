@@ -9,3 +9,11 @@
   background-color: grey;
   opacity: 0.2;
 }
+
+.picker {
+  color: grey;
+}
+
+.motto {
+  margin-top: 150px;
+}

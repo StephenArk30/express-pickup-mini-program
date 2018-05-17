@@ -8,7 +8,6 @@
     </block>
   </view>
   <view class='button'>
-    <button class='btn' bindtap='goToRegister'> 注册 </button>
     <button class='btn' bindtap='goToPublish'>进入平台</button>
   </view>
   <view class="usermotto">

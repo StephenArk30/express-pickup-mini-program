@@ -3,6 +3,14 @@
   <view>
     <form bindsubmit="formSubmit">
       <view class='inputs'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            学校：{{array[index]}}
+          </view>
+          <view class='hr'/>
+        </picker>
+      </view>
+      <view class='inputs'>
         <input name='username' placeholder='用户名'/>
         <view class='hr'/>
       </view>
@@ -19,8 +27,10 @@
         <view class='hr'/>
       </view>
       <view>
-        <button form-type='submit'>登录</button>
+        <button form-type='submit'>注册</button>
       </view>
     </form>
   </view>
+
+  <view class='motto'>代拿平台-注册</view>
 </view>
