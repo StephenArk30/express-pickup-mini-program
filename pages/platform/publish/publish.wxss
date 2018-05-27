@@ -1,1 +1,20 @@
 /* publish.wxss */
+
+.section{
+  width: 100%;
+  height: 60px;
+}
+
+.flex-wrp {
+  display: flex;
+}
+
+.bc_s_d {
+  height: 30px;
+}
+
+.bc_pay {
+  height: 60px;
+  display:flex;
+  align-items: center;
+}

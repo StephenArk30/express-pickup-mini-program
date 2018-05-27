@@ -6,7 +6,7 @@
 .hr {
   height: 2px;
   width: 100%;
-  background-color: grey;
+  background: grey;
   opacity: 0.2;
 }
 

@@ -1,2 +1,10 @@
 <!--publish.wxml-->
-<text>Welcome</text>
+<view class="section">
+  <view class="flex-wrp" style="flex-direction:row;width:100%">
+    <view class="flex-wrp" style="flex-direction:column;width:70%">
+      <view class="bc_s_d">快递位置： </view>
+      <view class="bc_s_d">送至：</view>
+    </view>
+    <view class="bc_pay" style='width:30%'>快递费：</view>
+  </view>
+</view>
