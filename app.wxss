@@ -8,3 +8,10 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.motto {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  bottom: 70px;
+}

@@ -15,6 +15,10 @@
         <view class='hr'/>
       </view>
       <view class='inputs'>
+        <input name='telephone' placeholder='手机号'/>
+        <view class='hr'/>
+      </view>
+      <view class='inputs'>
         <input name='card_id' type='number' placeholder='学号'/>
         <view class='hr'/>
       </view>

@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/register/register",
     "pages/platform/publish/publish",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/platform/addexpress/addexpress1/addexpress1",
+    "pages/platform/addexpress/addexpress2/addexpress2"
   ],
   "window": {
     "backgroundTextStyle": "light",

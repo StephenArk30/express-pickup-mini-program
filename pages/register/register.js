@@ -53,12 +53,20 @@ Page({
   onShareAppMessage: function () {
   
   },
+  
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const app = getApp()
     app.globalData.is_regist = true
     wx.navigateTo({
       url: '../platform/publish/publish',
+    })
+  },
+
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
     })
   },
 })

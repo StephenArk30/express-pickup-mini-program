@@ -1,0 +1,40 @@
+<!--addexpress2-->
+<view class='ctn'>
+
+  <view>
+    <form bindsubmit="formSubmit">
+      <text style='font-size: 25px;'>详情页显示内容</text>
+      <text style='font-size: 15px; color: grey;'>（*号为必填内容）</text>
+      <view class='hr'/>
+
+      <view class='inputs' style='margin-top:15px'>
+        <input name='express_id' placeholder='*快递单号（如32-11）'/>
+        <view class='hr'/>
+      </view>
+
+      <view class='inputs'>
+        <input name='starting_deatil' placeholder='详细位置（房间号等）'/>
+        <view class='hr'/>
+      </view>
+
+      <view class='inputs'>
+        <input name='size' placeholder='大小（例如“约莫篮球大小”）'/>
+        <view class='hr'/>
+      </view>
+
+      <view class='inputs'>
+        <input name='weight' placeholder='重量（例如“挺重的”）'/>
+        <view class='hr'/>
+      </view>
+
+      <view class='inputs' style='border: 1px grey'>
+        <textarea name='tipe' placeholder='详细备注'/>
+      </view>
+
+      <view>
+        <button form-type='submit' bindtap='nextPage'>下一步</button>
+      </view>
+    </form>
+  </view>
+
+</view>

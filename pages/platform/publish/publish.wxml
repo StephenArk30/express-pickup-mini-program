@@ -8,3 +8,6 @@
     <view class="bc_pay" style='width:30%'>快递费：</view>
   </view>
 </view>
+<view>
+  <button class='add_express' bindtap='goToaddExpress'>+</button>
+</view>

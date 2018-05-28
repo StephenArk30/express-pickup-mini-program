@@ -1,4 +1,4 @@
-// publish.js
+// pages/platform/addexpress/addexpress2/addexpress2.js
 Page({
 
   /**
@@ -11,22 +11,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-    var that = this
-    var url = "127.0.0.1/get_express";
-    wx.request({
-      url: url,
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json' // 返回json格式，必须要加
-      }, // 设置请求的 header
-      success: function (res) {
-        console.log(res.data.express);
-        that.setData({
-          expresses: res.data.express // 将返回的数据放在expresses里
-        });
-      }
-    })
+  onLoad: function (options) {
+  
   },
 
   /**
@@ -76,10 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  goToaddExpress: function () {
-    wx.navigateTo({
-      url: '../addexpress/addexpress1/addexpress1'
-    })
   }
 })

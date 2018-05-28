@@ -1,32 +1,30 @@
-// publish.js
+// pages/platform/addexpress/addexpress.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    // 选取学校的数据
+    express_station: ['杜鹃山菜鸟驿站', '桂庙菜鸟驿站'],
+    objectArray: [
+      {
+        id: 0,
+        name: '杜鹃山菜鸟驿站'
+      },
+      {
+        id: 1,
+        name: '桂庙菜鸟驿站'
+      },
+    ],
+    index: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-    var that = this
-    var url = "127.0.0.1/get_express";
-    wx.request({
-      url: url,
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json' // 返回json格式，必须要加
-      }, // 设置请求的 header
-      success: function (res) {
-        console.log(res.data.express);
-        that.setData({
-          expresses: res.data.express // 将返回的数据放在expresses里
-        });
-      }
-    })
+  onLoad: function (options) {
+  
   },
 
   /**
@@ -77,9 +75,21 @@ Page({
   onShareAppMessage: function () {
   
   },
-  goToaddExpress: function () {
+
+  nextPage: function () {
     wx.navigateTo({
-      url: '../addexpress/addexpress1/addexpress1'
+      url: '../addexpress2/addexpress2',
     })
+  },
+  
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
+
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
   }
 })

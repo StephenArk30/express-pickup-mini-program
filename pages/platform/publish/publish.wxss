@@ -18,3 +18,11 @@
   display:flex;
   align-items: center;
 }
+
+.add_express {
+  width: 10px;
+  height: 30px;
+  position: absolute;
+  bottom: 70px;
+  right: 30px;
+}

@@ -13,7 +13,3 @@
 .picker {
   color: grey;
 }
-
-.motto {
-  margin-top: 150px;
-}

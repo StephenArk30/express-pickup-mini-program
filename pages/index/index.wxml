@@ -10,7 +10,7 @@
   <view class='button'>
     <button class='btn' bindtap='goToPublish'>进入平台</button>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+</view>
+<view class="usermotto">
+    <text class="motto">{{motto}}</text>
 </view>
