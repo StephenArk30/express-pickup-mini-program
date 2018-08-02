@@ -3,7 +3,7 @@
   <view>
     <form bindsubmit="formSubmit">
       <view class='inputs'>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <picker  name = "school" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
           <view class="picker">
             学校：{{array[index]}}
           </view>
@@ -11,23 +11,7 @@
         </picker>
       </view>
       <view class='inputs'>
-        <input name='username' placeholder='用户名'/>
-        <view class='hr'/>
-      </view>
-      <view class='inputs'>
-        <input name='telephone' placeholder='手机号'/>
-        <view class='hr'/>
-      </view>
-      <view class='inputs'>
         <input name='card_id' type='number' placeholder='学号'/>
-        <view class='hr'/>
-      </view>
-      <view class='inputs'>
-        <input password name='password' placeholder='密码'/>
-        <view class='hr'/>
-      </view>
-      <view class='inputs'>
-        <input password name='password_confirm' placeholder='确认密码'/>
         <view class='hr'/>
       </view>
       <view>

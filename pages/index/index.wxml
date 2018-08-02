@@ -1,16 +1,26 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class='button'>
-    <button class='btn' bindtap='goToPublish'>进入平台</button>
-  </view>
-</view>
-<view class="usermotto">
-    <text class="motto">{{motto}}</text>
+<view class='content'>
+  <view class='title'>快递列表</view>
+  <view class='hr' style='width:30%; margin:0 auto'/>
+
+  <block wx:for="{{expresses}}" wx:key="*this" wx:for-item="exp">
+    <view id='{{exp.id}}' bindtap='detail'>
+      <view class='flex-wrp' style='flex-direction:column'>
+        <view style='text-align:center'>{{exp.name}}的快递</view>
+        <view class="flex-wrp" style="flex-direction:row; width:100%">
+          <view class="flex-wrp" style="flex-direction:column; width:85%">
+            <view wx:if="{{express_station[exp.starting]}}" class="bc_s_d">从 {{express_station[exp.starting]}} </view>
+            <view wx:else>从 {{exp.starting}}</view>
+            <view wx:if="{{destination[exp.dest]}}" class="bc_s_d">到 {{destination[exp.dest]}}</view>
+            <view wx:else>到 {{exp.dest}}</view>
+          </view>
+          <view class="bc_pay">{{exp.pay}}元</view>
+        </view>
+        <view style='font-size:15px; text-align:right; width:96%; color:grey'>查看详情</view>
+      </view>
+    </view>
+    <view class='hr'/>
+  </block>
+
+  <image src="/source/pictures/add_e.png" class='add_express' bindtap='goToaddExpress'/>
 </view>

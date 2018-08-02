@@ -1,16 +1,42 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/register/register",
-    "pages/platform/publish/publish",
     "pages/logs/logs",
-    "pages/platform/addexpress/addexpress1/addexpress1",
-    "pages/platform/addexpress/addexpress2/addexpress2"
+    "pages/addexpress/addexpress",
+    "pages/express-detail/express-detail",
+    "pages/take/take",
+    "pages/take_confirmed/take_confirmed",
+    "pages/me/myexpress/myexpress",
+    "pages/me/publish_detail/publish_detail",
+    "pages/me/take_detail/take_detail",
+    "pages/me/userinfo/userinfo",
+    "pages/me/edit_exp/edit_exp"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#6c0022",
     "navigationBarTitleText": "大学生快递代拿",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#808080",
+    "selectedColor": "#6c0022",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "快递平台",
+        "iconPath": "/source/pictures/home_us.png",
+        "selectedIconPath": "/source/pictures/home_s.png"
+      },
+      {
+        "pagePath": "pages/me/myexpress/myexpress",
+        "text": "我的",
+        "iconPath": "/source/pictures/me_us.png",
+        "selectedIconPath": "/source/pictures/me_s.png"
+      }
+    ]
   }
 }

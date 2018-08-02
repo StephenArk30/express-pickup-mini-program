@@ -1,25 +1,30 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
+/* publish.wxss */
+
+.bc_s_d {
+  height: 30px;
+  font-size: 16px;
+}
+
+.bc_pay {
+  height: 60px;
+  display:flex;
   align-items: center;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+/* 添加快递按钮 */
+.add_express {
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-.btn {
-  margin-top: 15px;
+.hr {
+  height: 2px;
+  width: 100%;
+  background: grey;
+  opacity: 0.2;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

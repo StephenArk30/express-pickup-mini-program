@@ -1,4 +1,7 @@
 // register.js
+
+const app = getApp()
+
 Page({
 
   // 页面的初始数据
@@ -13,53 +16,59 @@ Page({
     ],
     index: 0,
   },
-
-  // 生命周期函数--监听页面加载
-  onLoad: function (options) {
-  
-  },
-
-  // 生命周期函数--监听页面初次渲染完成
-  onReady: function () {
-  
-  },
-
-  // 生命周期函数--监听页面显示
-  onShow: function () {
-  
-  },
-
-  // 生命周期函数--监听页面隐藏
-  onHide: function () {
-  
-  },
-
-  // 生命周期函数--监听页面卸载
-  onUnload: function () {
-  
-  },
-
-  // 页面相关事件处理函数--监听用户下拉动作
-  onPullDownRefresh: function () {
-  
-  },
-
-  // 页面上拉触底事件的处理函数
-  onReachBottom: function () {
-  
-  },
-
-  // 用户点击右上角分享
-  onShareAppMessage: function () {
-  
-  },
   
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    const app = getApp()
-    app.globalData.is_regist = true
-    wx.navigateTo({
-      url: '../platform/publish/publish',
+    // form 表单取值，格式 e.detail.value.name(name为input中自定义name值) ；使用条件：需通过<form bindsubmit="formSubmit">与<button formType="submit">一起使用
+    var school = e.detail.value.school;
+    var card_id = e.detail.value.card_id;
+    var that = this;
+    
+    // 前台检测
+    if (card_id == "") {
+      wx.showToast({
+        title: '请填写完整信息！',
+        icon: 'none'
+      })
+      return;
+    }
+    if (card_id.length != 10) {
+      wx.showToast({
+        title: '请输入10位学号！',
+        icon: 'none'
+      })
+      return;
+    }
+
+    // 数据发送至后台
+    var url = app.globalData.api + "/register";
+    wx.request({
+      url: url,
+      method: 'POST',
+      data: {
+        wechat_id: app.globalData.open_id,
+        school: school,
+        card_id: card_id,
+      },
+      header: {
+        'Content-Type': 'application/json' // 返回json格式，必须要加
+      }, // 设置请求的 header
+      success: function (res) {
+        console.log(res.data);
+        if(res.data.have_res) {
+          wx.showToast({
+            title: '该学号已存在！',
+            icon: 'none'
+          })
+          return;
+        }
+        else{
+            app.globalData.user_id = res.data.user_id
+            wx.switchTab({
+              url: '../index/index',
+            })
+        }
+      }
     })
   },
 

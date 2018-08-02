@@ -9,9 +9,76 @@
   box-sizing: border-box;
 } 
 
+.content {
+  width: 90%;
+  margin: 0 auto;
+}
+
 .motto {
   width: 100%;
   position: absolute;
   text-align: center;
   bottom: 70px;
+  color: #6c0022;
+}
+
+.hr {
+  height: 2px;
+  width: 100%;
+  background: grey;
+  opacity: 0.2;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.blank {
+  height: 10px;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #808080;
+}
+
+.logo {
+  width: 15px;
+  height: 15px;
+  margin-right: 3px;
+  margin-top:4px;
+}
+
+/*
+垂直/水平分隔
+style='flex-direction:column'
+style='flex-direction:row'
+*/
+.flex-wrp {
+  display: flex;
+}
+
+view {
+  font-size: 18px;
+}
+
+button {
+  background-color: #6c0022;
+  color: white;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  color:#6c0022 !important;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border-color:#6c0022 !important;
+  background:#6c0022 !important;
+}
+
+switch .wx-switch-input {
+  border-color:#6c0022 !important;
+  background:#6c0022 !important;
 }

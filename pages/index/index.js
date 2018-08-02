@@ -1,68 +1,44 @@
-//index.js
-//获取应用实例
+// index.js
+// 首页，展示发布的快递，以及添加快递按钮
+
 const app = getApp()
 
 Page({
+
   data: {
-    motto: '大学生快递代拿',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    expresses: [],
+    express_station: app.globalData.express_station,
+    destination: app.globalData.destination
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+
+  onShow: function () {
+    var that = this
+    wx.request({
+      url: app.globalData.api + "/get_express",
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json' // 返回json格式，必须要加
+      }, // 设置请求的 header
+      success: function (res) {
+        console.log("res: ", res.data);
+        that.setData({
+          expresses: res.data // 将返回的数据放在expresses里
+        });
+        console.log("expresses:", that.data.expresses)
+      }
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+
+  goToaddExpress: function () {
+    wx.navigateTo({
+      url: '../addexpress/addexpress'
+    })
   },
-  goToPublish: function () {
-    // 判断用户是否注册
-    if (app.globalData.is_regist) {
-      wx.navigateTo({
-        url: '../platform/publish/publish',
-      })
-    }
-    // 否则前往注册
-    else {
-      wx.navigateTo({
-        url: '../register/register',
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+
+  detail: function (e) {
+    console.log(e.currentTarget.id)
+    wx.navigateTo({
+      url: '../express-detail/express-detail?id=' + e.currentTarget.id,
     })
   }
 })
