@@ -1,0 +1,24 @@
+<!--register.wxml-->
+<view class="container">
+  <view>
+    <form bindsubmit="formSubmit">
+      <view class='inputs'>
+        <picker  name = "school" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            学校：{{array[index]}}
+          </view>
+          <view class='hr'/>
+        </picker>
+      </view>
+      <view class='inputs'>
+        <input name='card_id' type='number' placeholder='学号'/>
+        <view class='hr'/>
+      </view>
+      <view>
+        <button form-type='submit'>注册</button>
+      </view>
+    </form>
+  </view>
+
+  <view class='motto'>代拿平台-注册</view>
+</view>

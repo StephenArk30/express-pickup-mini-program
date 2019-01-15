@@ -1,0 +1,65 @@
+<!--userinfo.wxml-->
+<view class='content'>
+  <view class='userinfo'>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class='hr'/>
+
+  <form bindsubmit="formSubmit">
+    <picker name='school' bindchange="school_Change" value="{{i}}" range="{{school}}">
+      <view class="picker">
+        学校：{{school[i]}}
+      </view>
+    </picker>
+    <view class='hr'/>
+
+    <view class='flex-wrp'>
+      <text>常用收件人：</text>
+      <input name='name' value="{{name}}"/>
+    </view>
+    <view class='hr'/>
+
+    <view class='flex-wrp'>
+      <text>学号：</text>
+      <input name='card_id' type='number' value='{{card_id}}'/>
+    </view>
+    <view class='hr'/>
+
+    <view class='flex-wrp'>
+      <text>手机号：</text>
+      <input name='tele' value='{{tele}}'/>
+    </view>
+    <view class='hr'/>
+    <view class='flex-wrp'>
+      <text>微信号：</text>
+      <input name='wechat' value='{{wechat}}'/>
+    </view>
+    <view class='hr'/>
+    <view class='flex-wrp'>
+      <text>QQ号：</text>
+      <input name='qq' value='{{qq}}'/>
+    </view>
+    <view class='hr'/>
+      
+    <view class='flex-wrp'>
+      <view style='text-align: center'>常用快递站：</view>
+        <picker name='station' bindchange="e_s_Change" value="{{j}}" range="{{express_station}}">
+          <view>{{express_station[j]}}</view>
+        </picker>
+    </view>
+    <view class='hr'/>
+        
+    <view class='flex-wrp'>
+      <view style='text-align: center'>常用目的地：</view>
+        <picker name='destination' bindchange="dest_Change" value="{{k}}" range="{{destination}}">
+          <view>{{destination[k]}}</view>
+        </picker>
+    </view>
+    <view class='hr'/>
+
+    <view>
+      <button form-type='submit' style='margin-top:50px; width:80%'>确认</button>
+    </view>
+  </form>
+</view>

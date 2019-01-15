@@ -1,0 +1,29 @@
+/* login.wxss */
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 头像 */
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+/* 昵称 */
+.userinfo-nickname {
+  color: #aaa;
+}
+
+/* 底下的字 */
+.usermotto {
+  margin-top: 200px;
+}
+
+.btn {
+  margin-top: 15px;
+}

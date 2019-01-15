@@ -1,0 +1,36 @@
+<!--express-detail.wxml-->
+<view class='content'>
+  <view class='title'>快递详情</view>
+  <view class='hr' style='width:30%; margin:0 auto'/>
+  <!--起始地址-->
+  <view class='flex-wrp' style='flex-direction:row'>
+    <view wx:if="{{express_station[exp.starting]}}" class="bc_s_d">从 {{express_station[exp.starting]}}</view>
+    <view wx:else>从 {{exp.starting}}</view>
+    <view class='blank' style='width:15px'/>
+    <view wx:if="{{destination[exp.dest]}}" class="bc_s_d">到 {{destination[exp.dest]}}</view>
+    <view wx:else>到 {{exp.dest}}</view>
+    <view wx:if="{{exp.dest_d}}">-{{exp.dest_d}}</view>
+  </view>
+  <!--感谢金-->
+  <view class='flex-wrp' style='flex-direction:row'>
+    <image src='/source/pictures/coin.png' style='width:20px; height:20px; margin-right:4px; margin-left:3px; margin-top:3px'/>
+    <view>感谢金：{{exp.pay}}元</view>
+  </view>
+  <!--收件人-->
+  <view>收件人：{{exp.name}}</view>
+  <!--快递号-->
+  <view>快递号：{{exp.exp_id}}</view>
+  <view class='blank'/>
+  <!--重量大小-->
+  <view wx:if="{{exp.weight}}">重量：{{exp.weight}}</view>
+  <view wx:if="{{exp.size}}">大小：{{exp.size}}</view>
+  <view class='blank'/>
+  <!--备注-->
+  <view wx:if="{{exp.tips || exp.tips_d}}" style='color:grey'>
+    <view>备注</view>
+    <view wx:if="{{exp.tips}}">{{exp.tips}}</view>
+    <scroll-view scroll-y style='height:50px' wx:if="{{exp.tips_d}}">{{exp.tips_d}}</scroll-view>
+  </view>
+
+  <view style='position:absolute; text-align:center; bottom:70px; width:100%'><button bindtap='take_express' style='width:60%'>帮忙代拿</button></view>
+</view>

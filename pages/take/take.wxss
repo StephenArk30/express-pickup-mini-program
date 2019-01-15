@@ -1,5 +1,0 @@
-/* pages/platform/take/take.wxss */
-
-input {
-  font-size: 15px;
-}
