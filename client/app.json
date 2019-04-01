@@ -38,5 +38,6 @@
         "selectedIconPath": "/source/pictures/me_s.png"
       }
     ]
-  }
+  },
+  "cloud": true
 }

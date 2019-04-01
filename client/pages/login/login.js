@@ -3,6 +3,7 @@
 
 //获取应用实例
 const app = getApp()
+const test = require("../../api/express");
 
 Page({
   data: {
@@ -18,6 +19,8 @@ Page({
     })
   },
   onLoad: function () {
+    test.db_get(); // 查
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

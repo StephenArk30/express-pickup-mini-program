@@ -47,7 +47,7 @@ Page({
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     wx.request({
-      url: 'http://127.0.0.1:5000/edit_user',
+      url: app.globalData.api + '/edit_user',
       method: 'POST',
       data: {
         'user_id': app.globalData.user_id,
