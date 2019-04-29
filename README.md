@@ -23,7 +23,40 @@
    test.db_del();
    test.db_get();
    test.db_edit();
-    ```
+   ```
 6. 保存编译，查看控制台的信息，以下是示例结果
 
 ![](client/3-31/console-res.JPG)
+
+# 修改任务
+
+## 将服务器数据库搬到云端
+
+打开```server/model.py```，查看数据库模型
+
+这里有两个类，每一个类对应一张表，例如：
+
+```python
+class User(db.Model):
+    __tablename__ = 'user'  # 表名
+    # 属性名 = db.Column(第一个参数是db.类型，其它不用理)
+    # 必填项
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    school = db.Column(db.Integer, nullable=False)
+    card_id = db.Column(db.String(12), nullable=False)
+    wechat_id = db.Column(db.String(50), nullable=False)
+
+    # 常用信息（选填）
+    name = db.Column(db.String(15), nullable=True)  # 收件人
+    station = db.Column(db.Integer, nullable=True)  # 快递站
+    destination = db.Column(db.Integer, nullable=True)  # 目的地
+    tele = db.Column(db.String(15), nullable=True)  # 电话
+    wechat = db.Column(db.String(20), nullable=True)  # 微信
+    qq = db.Column(db.String(15), nullable=True)  # QQ
+```
+
+![1556510042959](README-img\1556510042959.png"表里对应的一条数据")
+
+对应的在云端添加一个叫user的collection，如上添加一条数据，id可以不用，自动生成的。类型看着填，例如Integer就是number，值可以瞎jb填。
+
+![1556510623282](README-img\1556510623282.png)

@@ -7,8 +7,10 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       <view class='button'>
         <button class='btn' bindtap='goToPublish'>进入平台</button>
+        <!-- <button bindtap='choosePhoto'>选择图片</button> -->
       </view>
     </block>
+    
   </view>
 </view>
 <view class="usermotto">

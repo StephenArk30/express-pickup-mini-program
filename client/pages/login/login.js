@@ -19,7 +19,10 @@ Page({
     })
   },
   onLoad: function () {
-    test.db_get(); // 查
+    test.db_get().then(res => {
+      console.log(res);
+    }).catch(err => {}); // 查
+    test.download_file();
 
     if (app.globalData.userInfo) {
       this.setData({
@@ -71,5 +74,15 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
+  choosePhoto: function () {
+    // 微信选择图片的接口
+    wx.chooseImage({
+      success: function(res) {
+        console.log(res)
+        test.upload_file(res.tempFilePaths[0]);
+      },
+    })
+  },
 })

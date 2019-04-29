@@ -28,6 +28,7 @@
 		"miniprogram": {
 			"current": -1,
 			"list": []
-		}
+		},
+    "cloudfunctionRoot": "./cloud-functions"
 	}
 }
