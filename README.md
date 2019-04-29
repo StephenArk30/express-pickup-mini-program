@@ -55,8 +55,8 @@ class User(db.Model):
     qq = db.Column(db.String(15), nullable=True)  # QQ
 ```
 
-![1556510042959](README-im/1556510042959.png "表里对应的一条数据")
+![1556510042959](README-img/1556510042959.png "表里对应的一条数据")
 
 对应的在云端添加一个叫user的collection，如上添加一条数据，id可以不用，自动生成的。类型看着填，例如Integer就是number，值可以瞎jb填。
 
-![1556510623282](README-im/1556510623282.png)
+![1556510623282](README-img/1556510623282.png)
