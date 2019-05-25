@@ -37,7 +37,7 @@ Page({
   },
 
   detail: function (e) {
-    // console.log(e.currentTarget.id)
+    console.log(e)
     // 查看快递
     wx.navigateTo({
       url: '../express-detail/express-detail?id=' + e.currentTarget.id,

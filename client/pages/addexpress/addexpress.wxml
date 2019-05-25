@@ -5,15 +5,16 @@
     <view style='font-size:15px'>（*号为必填内容）</view>
   </view>
   <view class='hr' style='width:110px; margin:0 auto; margin-bottom:10px'/>
+  <!--快递表单，需要填写的东西都在里面-->
   <form bindsubmit="publish">
     <!--首页显示内容-->
     <view style='font-size:20px; text-align:center'>首页显示内容</view>
     <view class='hr' style='width:125px; margin:0 auto; margin-bottom:15px'/>
     <!--起点-->
     <view style='text-align:center'>*快递位置</view>
-    <radio-group name='stat' class="radio-group" bindchange="Stat_Change">
-      <picker name="start" bindchange="e_s_Change" value="{{i}}" range="{{express_station}}">
-        <radio checked="true" value='0' style='color: {{color[stat_color]}}'>
+    <radio-group class="radio-group" bindchange="Stat_Change">
+      <picker bindchange="e_s_Change" value="{{i}}" range="{{express_station}}">
+        <radio checked="true" value='0' style='color: {{ color[stat_color] }}'>
           {{express_station[i]}}
         </radio>
       </picker>
@@ -22,8 +23,8 @@
     <view class='hr'/>
     <!--终点-->
     <view style='text-align: center'>*送至</view>
-    <radio-group name="dest" class="radio-group" bindchange="Dest_Change">
-      <picker name='destination' bindchange="dest_Change" value="{{j}}" range="{{destination}}">
+    <radio-group class="radio-group" bindchange="Dest_Change">
+      <picker bindchange="dest_Change" value="{{j}}" range="{{destination}}">
         <radio value='0' checked="true" style='color: {{color[dest_color]}}'>
           {{destination[j]}}
         </radio>
@@ -33,13 +34,13 @@
     <view class='hr'/>
     <!--费用-->
     <view class='flex-wrp'>
-      <input name='payment' placeholder='*感谢金' style='width:80px' id='0' bindfocus='focus'/>
+      <input name='pay' placeholder='*感谢金' style='width:80px' id='0' bindfocus='focus'/>
       <text>元</text>
     </view>
     <view class='hr' style='background:{{color[hr[0]]}}'/>
     <!--收件人-->
     <view class='flex-wrp'>
-      <input name='ownername' placeholder='*收件人' value='{{name}}' style='width:100px' id='1' bindfocus='focus'/>
+      <input name='owner' placeholder='*收件人' value='{{name}}' style='width:100px' id='1' bindfocus='focus'/>
       <text>匿名（只保留姓）</text>
       <switch style='margin-left:5px' name='anoy'/>
     </view>
@@ -51,10 +52,10 @@
     <view style='font-size: 20px; text-align:center'>详情页显示内容</view>
     <view class='hr' style='width:145px; margin:0 auto; margin-bottom:15px'/>
     <!--快递id-->
-    <input name='express_id' placeholder='*快递单号（如32-11）' id='3' bindfocus='focus'/>
+    <input name='e_id' placeholder='*快递单号（如32-11）' id='3' bindfocus='focus'/>
     <view class='hr' style='background:{{color[hr[3]]}}'/>
     <!--目的地详-->
-    <input name='destination_room' placeholder='详细位置（房间号等）' id='4' bindfocus='focus'/>
+    <input name='dest_d' placeholder='详细位置（房间号等）' id='4' bindfocus='focus'/>
     <view class='hr' style='background:{{color[hr[4]]}}'/>
     <!--大小、重量-->
     <input name='size' placeholder='大小（例如“约莫篮球大小”）' id='5' bindfocus='focus'/>
@@ -62,7 +63,7 @@
     <input name='weight' placeholder='重量（例如“挺重的”）' id='6' bindfocus='focus'/>
     <view class='hr' style='background:{{color[hr[6]]}}'/>
     <!--详细备注-->
-    <textarea name='tips_detail' style='border: 1px grey' placeholder='详细备注' id='7' bindfocus='focus'/>
+    <textarea name='tips_d' style='border: 1px grey' placeholder='详细备注' id='7' bindfocus='focus'/>
     <view class='hr' style='background:{{color[hr[7]]}}; margin-bottom:15px'/>
     <!--联系方式-->
     <view style='font-size:20px; text-align:center'>显示给确认代拿的同学的内容</view>

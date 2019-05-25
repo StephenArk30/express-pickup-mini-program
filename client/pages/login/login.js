@@ -2,8 +2,7 @@
 // 登录
 
 //获取应用实例
-const app = getApp()
-const test = require("../../api/express");
+const app = getApp();
 
 Page({
   data: {
@@ -19,10 +18,6 @@ Page({
     })
   },
   onLoad: function () {
-    test.db_get().then(res => {
-      console.log(res);
-    }).catch(err => {}); // 查
-    test.download_file();
 
     if (app.globalData.userInfo) {
       this.setData({
@@ -42,7 +37,7 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
+          app.globalData.userInfo = res.userInfo;
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -65,24 +60,14 @@ Page({
       })
     }
   },
-  
+
   // 获取用户信息
   getUserInfo: function(e) {
     // console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.userInfo = e.detail.userInfo;
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },
-
-  choosePhoto: function () {
-    // 微信选择图片的接口
-    wx.chooseImage({
-      success: function(res) {
-        console.log(res)
-        test.upload_file(res.tempFilePaths[0]);
-      },
-    })
-  },
-})
+  }
+});
