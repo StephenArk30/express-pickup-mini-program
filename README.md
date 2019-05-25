@@ -73,43 +73,43 @@ class User(db.Model):
 
 addexpress.wxml见下
 
-![add-exp](README-img\add-exp.png)
+![add-exp](README-img/add-exp.png)
 
 其中，form是需要填写的表单，里面有一堆输入框之类的组件。bindsubmit既点击了“发布”按钮后会调用的函数，这里函数名为publish。
 
-![add-exp](README-img\add-exp-form-submit.png)
+![add-exp](README-img/add-exp-form-submit.png)
 
 form展开：
 
-![add-exp](README-img\add-exp-form.png)
+![add-exp](README-img/add-exp-form.png)
 
 以收件人为例，输入框input的name为"owner"：
 
-![add-exp](README-img\owner.png)
+![add-exp](README-img/owner.png)
 
 addexpress.js中的publish函数：
 
-![1558769022521](README-img\publish.png)
+![1558769022521](README-img/publish.png)
 
 传入的e就是wxml中的form，e.detail.value为form中的值。要访问表单中组件的值就用e.detail.value.组件name，例如收件人输入框中的值为e.detail.owner。
 
 下面一段是来验证输入的合法性的：
 
-![1558769364006](README-img\1558769364006.png)
+![1558769364006](README-img/1558769364006.png)
 
 然后向数据库的"express" collection增加一条数据，之前是向服务器发送请求，现改为调用本地api：
 
-![1558769426579](README-img\1558769426579.png)
+![1558769426579](README-img/1558769426579.png)
 
 expressApi：api/express.js
 
-![1558769855382](README-img\1558769855382.png)
+![1558769855382](README-img/1558769855382.png)
 
 对数据进行部分处理后，调用cloud_api中的数据库增添函数增加一条数据：
 
-![1558770019227](README-img\1558770019227.png)
+![1558770019227](README-img/1558770019227.png)
 
 cloud_api是我们之前写好的增删查改：
 
-![1558770230355](README-img\cloud-api.png)
+![1558770230355](README-img/cloud-api.png)
 
