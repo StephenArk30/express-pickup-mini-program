@@ -1,7 +1,8 @@
 // express-detail.js
 // 快递详情页，显示快递的起始地址、感谢费、收件人、快递号、重量大小和备注
 
-const app = getApp()
+const app = getApp();
+const express_api = require('../../api/express.js');
 
 Page({
 
@@ -12,26 +13,29 @@ Page({
   },
 
   onLoad: function (options) {
-    this.setData({
-      id: options.id // 从主页传递来的快递id
-    })
-    var that = this
+    var that = this;
     // 获取快递的详细信息
-    wx.request({
-      url: app.globalData.api + '/get_express_d',
-      data: { id: options.id },
-      success: res=> {
-        // 如果是自己发布的则跳转至发布详情页
-        if (app.globalData.user_id == res.data.owner_id) {
-          wx.redirectTo({
-            url: '../me/publish_detail/publish_detail?id=' + res.data.id,
-          })
-        }
-        else that.setData({
-          exp: res.data
+    express_api.getExpByID(options.id).then(exp => {
+      if (exp[0].owner_id == app.globalData.user_id) {
+        wx.redirectTo({
+          url: '../me/publish_detail/publish_detail?_id=' + options.id,
         })
       }
+      that.setData({ exp: exp[0] });
     })
+    .catch(err => {
+      console.log(err);
+      wx.showModal({
+        title: '抱歉',
+        content: '无法获取该快递',
+        showCancel: false,
+        success(res) {
+          wx.navigateBack({
+            delta: 1
+          });
+        }
+      });
+    });
   },
 
   // 取快递页面

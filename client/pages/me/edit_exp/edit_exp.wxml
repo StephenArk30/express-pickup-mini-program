@@ -40,13 +40,13 @@
     <view class='hr'/>
     <!--费用-->
     <view class='flex-wrp'>
-      <input name='payment' placeholder='*感谢金' style='width:80px' id='0' bindfocus='focus' value='{{exp.pay}}'/>
+      <input name='payment' placeholder='*感谢金' style='width:80px' id='0' bindfocus='focus' value='{{exp.payment}}'/>
       <text>元</text>
     </view>
     <view class='hr' style='background:{{color[hr[0]]}}'/>
     <!--收件人-->
     <view class='flex-wrp'>
-      <input name='ownername' placeholder='*收件人' value='{{name}}' style='width:100px' id='1' bindfocus='focus' value='{{exp.name}}'/>
+      <input name='ownername' placeholder='*收件人' value='{{name}}' style='width:100px' id='1' bindfocus='focus' value='{{exp.ownername}}'/>
       <text>匿名（只保留姓）</text>
       <switch style='margin-left:5px' name='anoy'/>
     </view>
@@ -58,10 +58,10 @@
     <view style='font-size: 20px; text-align:center'>详情页显示内容</view>
     <view class='hr' style='width:145px; margin:0 auto; margin-bottom:15px'/>
     <!--快递id-->
-    <input name='express_id' placeholder='*快递单号（如32-11）' id='3' bindfocus='focus' value='{{exp.exp_id}}'/>
+    <input name='express_id' placeholder='*快递单号（如32-11）' id='3' bindfocus='focus' value='{{exp.express_id}}'/>
     <view class='hr' style='background:{{color[hr[3]]}}'/>
     <!--目的地详-->
-    <input name='destination_room' placeholder='详细位置（房间号等）' id='4' bindfocus='focus' value='{{exp.dest_d}}'/>
+    <input name='destination_room' placeholder='详细位置（房间号等）' id='4' bindfocus='focus' value='{{exp.destination_detail}}'/>
     <view class='hr' style='background:{{color[hr[4]]}}'/>
     <!--大小、重量-->
     <input name='size' placeholder='大小（例如“约莫篮球大小”）' id='5' bindfocus='focus' value='{{exp.size}}'/>
@@ -69,7 +69,7 @@
     <input name='weight' placeholder='重量（例如“挺重的”）' id='6' bindfocus='focus' value='{{exp.weight}}'/>
     <view class='hr' style='background:{{color[hr[6]]}}'/>
     <!--详细备注-->
-    <textarea name='tips_detail' style='border: 1px grey' placeholder='详细备注' id='7' bindfocus='focus' value='{{exp.tips_d}}'/>
+    <textarea name='tips_detail' style='border: 1px grey' placeholder='详细备注' id='7' bindfocus='focus' value='{{exp.tips_detail}}'/>
     <view class='hr' style='background:{{color[hr[7]]}}; margin-bottom:15px'/>
     <!--联系方式-->
     <view style='font-size:20px; text-align:center'>显示给确认代拿的同学的内容</view>
@@ -79,7 +79,7 @@
     <view class='flex-wrp'>
       <image src="/source/pictures/tele.png" class='logo'/>
       <view>电话：</view>
-      <input name="tele" type='number' value='{{tele}}' id='8' bindfocus='focus' value='{{exp.tele}}'/>
+      <input name="tele" type='number' id='8' bindfocus='focus' value='{{exp.tele_o}}'/>
     </view>
     <view class='flex-wrp'>
       <view class='blank'/>
@@ -88,7 +88,7 @@
     <view class='flex-wrp'>
       <image src="/source/pictures/wechat.png" class='logo'/>
       <view>微信：</view>
-      <input name="wechat" value='{{wechat}}' id='9' bindfocus='focus' value='{{exp.wechat}}'/>
+      <input name="wechat" id='9' bindfocus='focus' value='{{exp.wechat_o}}'/>
     </view>
     <view class='flex-wrp'>
       <view class='blank'/>
@@ -97,7 +97,7 @@
     <view class='flex-wrp'>
       <image src="/source/pictures/qq.png" class='logo' style='margin-left:1px; width:14px; height:14px;'/>
       <view>QQ：</view>
-      <input name="qq" value='{{qq}}' id='10' bindfocus='focus' value='{{exp.qq}}'/>
+      <input name="qq" id='10' bindfocus='focus' value='{{exp.qq_o}}'/>
     </view>
     <view class='flex-wrp'>
       <view class='blank'/>

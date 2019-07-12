@@ -1,7 +1,8 @@
 // userinfo.js
 // 用户信息
 
-const app = getApp()
+const app = getApp();
+const user_api = require("../../../api/user.js");
 
 Page({
 
@@ -21,52 +22,41 @@ Page({
   },
 
   onLoad: function (options) {
-    this.setData({
-      userInfo: app.globalData.userInfo,
+    let that = this;
+    user_api.getUserByID(app.globalData.user_id)
+    .then(user => {
+      console.log(user);
+      let userInfo = user[0];
+      that.setData({ userInfo, card_id: userInfo.card_id });
+      if (userInfo.name) that.setData({ name: userInfo.name });
+      if (userInfo.school) that.setData({ index: userInfo.school });
+      if (userInfo.tele) that.setData({ tele: userInfo.tele });
+      if (userInfo.wechat) that.setData({ wechat: userInfo.wechat });
+      if (userInfo.qq) that.setData({ qq: userInfo.qq });
+      if (userInfo.station) that.setData({ j: userInfo.station });
+      if (userInfo.destination) that.setData({ k: userInfo.destination });
     })
-    var that = this
-    wx.request({
-      url: app.globalData.api + '/get_user',
-      data: {'user_id': app.globalData.user_id},
-      success (res) {
-        console.log(res.data)
-        that.setData ({
-          tele: res.data.tele,
-          card_id: res.data.card_id
-        })
-        if (res.data.name) that.setData({ name: res.data.name })
-        if (res.data.school) that.setData({ index: res.data.school })
-        if (res.data.wechat) that.setData({ wechat: res.data.wechat })
-        if (res.data.qq) that.setData({ qq: res.data.qq })
-        if (res.data.station) that.setData({ j: res.data.station })
-        if (res.data.destination) that.setData({ k: res.data.destination })
-      }
-    })
+    .catch(err => {});
   },
 
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    wx.request({
-      url: app.globalData.api + '/edit_user',
-      method: 'POST',
-      data: {
-        'user_id': app.globalData.user_id,
-        'school': e.detail.value.school,
-        'name': e.detail.value.name,
-        'tele': e.detail.value.tele,
-        'wechat': e.detail.value.wechat,
-        'qq': e.detail.value.qq,
-        'card_id': e.detail.value.card_id,
-        'stat': e.detail.value.station,
-        'dest': e.detail.value.destination,
-      },
-      success () {
-        wx.showToast({
-          title: '修改成功！',
-          icon: 'none'
-        })
-      }
+    console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    let userInfo = e.detail.value;
+    userInfo._id = this.data.userInfo._id;
+    user_api.editUser(userInfo._id, userInfo)
+    .then(res => {
+      that.setData({ userInfo });
+      wx.showToast({
+        title: '修改成功！',
+        icon: 'none'
+      });
     })
+    .catch(err => {
+      wx.showToast({
+        title: '修改失败，请重试',
+        icon: 'none'
+      });
+    });
   },
 
   school_Change: function (e) {

@@ -48,19 +48,21 @@
   <block wx:if="{{exp.state == 1}}">
     <view>状态：在路上，代拿人：{{exp.taker.card_id}}</view>
     <view>联系方式：</view>
-    <view wx:if="{{exp.taker.tele}}" class='flex-wrp' style='flex-direction:row'>
-    <image src="/source/pictures/tele.png" class='logo'/>
-    <view style='font-size:15px'>电话：{{exp.taker.tele}}</view>
+    <view style='margin-bottom: 300rpx'>
+      <view wx:if="{{exp.taker.tele}}" class='flex-wrp' style='flex-direction:row'>
+        <image src="/source/pictures/tele.png" class='logo'/>
+        <view style='font-size:15px'>电话：{{exp.taker.tele}}</view>
+      </view>
+      <view wx:if="{{exp.taker.wechat}}" class='flex-wrp' style='flex-direction:row'>
+        <image src="/source/pictures/wechat.png" class='logo'/>
+        <view style='font-size:15px'>微信：{{exp.taker.wechat}}</view>
+      </view>
+      <view wx:if="{{exp.taker.qq}}" class='flex-wrp' style='flex-direction:row'>
+        <image src="/source/pictures/qq.png" class='logo' style='margin-left:1px; width:14px; height:14px;'/>
+        <view style='font-size:15px'>QQ：{{exp.taker.qq}}</view>
+      </view>
     </view>
-    <view wx:if="{{exp.taker.wechat}}" class='flex-wrp' style='flex-direction:row'>
-    <image src="/source/pictures/wechat.png" class='logo'/>
-    <view style='font-size:15px'>微信：{{exp.taker.wechat}}</view>
-    </view>
-    <view wx:if="{{exp.taker.qq}}" class='flex-wrp' style='flex-direction:row'>
-    <image src="/source/pictures/qq.png" class='logo' style='margin-left:1px; width:14px; height:14px;'/>
-    <view style='font-size:15px'>QQ：{{exp.taker.qq}}</view>
-    </view>
-    <view class='motto'>
+    <view class='tips'>
       <view>预计送达时间：{{exp.taker.time}}</view>
       <view style='top:5px;'>请尽快将快递送达！</view>
     </view>
@@ -82,7 +84,7 @@
     <image src="/source/pictures/qq.png" class='logo' style='margin-left:1px; width:14px; height:14px;'/>
     <view style='font-size:15px'>QQ：{{exp.taker.qq}}</view>
     </view>
-    <view style='margin-top:30px; width:100%'>
+    <view class='confirm_panel'>
       <button bindtap='confirm' style='width:60%'>确认收款</button>
     </view>
   </block>

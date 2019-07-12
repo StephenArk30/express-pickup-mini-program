@@ -3,7 +3,6 @@
     "pages/login/login",
     "pages/index/index",
     "pages/register/register",
-    "pages/logs/logs",
     "pages/addexpress/addexpress",
     "pages/express-detail/express-detail",
     "pages/take/take",

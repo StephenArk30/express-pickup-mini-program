@@ -1,11 +1,11 @@
 // myexpress.js
 
-const app = getApp()
+const app = getApp();
+const express_api = require("../../../api/express.js");
 
 Page({
 
   data: {
-    userInfo: {},
     express_publish: [],
     express_take: [],
     express_station: app.globalData.express_station,
@@ -13,23 +13,13 @@ Page({
   },
 
   onShow: function () {
-    this.setData({
-      userInfo: app.globalData.userInfo,
-    })
-    var that = this
-    var url = app.globalData.api + "/get_my_express";
-    // 获取用户快递
-    wx.request({
-      url: url,
-      data: {user_id: app.globalData.user_id},
-      success: function (res) {
-        console.log("res: ", res.data);
-        that.setData({
-          express_publish: res.data.express_publish,
-          express_take: res.data.express_take,
-        });
-      }
-    })
+    let that = this;
+    express_api.getExpByOwnerID(app.globalData.user_id)
+      .then(express_publish => that.setData({ express_publish }))
+      .catch(err => {});
+    express_api.getExpByTakerID(app.globalData.user_id)
+      .then(express_take => that.setData({ express_take }))
+      .catch(err => {});
   },
 
   publish_detail: function (e) {

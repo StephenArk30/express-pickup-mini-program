@@ -2,8 +2,8 @@
 <view class='content'>
   <!--用户头像、昵称-->
   <view class='userinfo'>
-    <image bindtap="edit_user" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}的快递</text>
+    <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+    <open-data type="userNickName" class="userinfo-nickname">的快递</open-data>
   </view>
   <view class='hr' style='width:35%; margin:0 auto'/>
   <!--发布的快递-->
@@ -15,15 +15,15 @@
         <view>{{exp.e_id}}</view>
         <view class="flex-wrp" style="flex-direction:row; width:100%">
           <view class="flex-wrp" style="flex-direction:column; width:85%">
-            <view wx:if="{{express_station[exp.start]}}" class="bc_s_d">从 {{express_station[exp.start]}} </view>
-            <view wx:else>从 {{exp.start}}</view>
-            <view wx:if="{{destination[exp.dest]}}" class="bc_s_d">到 {{destination[exp.dest]}}</view>
-            <view wx:else>到 {{exp.dest}}</view>
+            <view wx:if="{{express_station[exp.starting]}}" class="bc_s_d">从 {{express_station[exp.starting]}} </view>
+            <view wx:else>从 {{exp.starting}}</view>
+            <view wx:if="{{destination[exp.destination]}}" class="bc_s_d">到 {{destination[exp.destination]}}</view>
+            <view wx:else>到 {{exp.destination}}</view>
           </view>
-          <view class="bc_pay">{{exp.pay}}元</view>
+          <view class="bc_pay">{{exp.payment}}元</view>
         </view>
         <view class="flex-wrp" style="flex-direction:row; font-size:15px; margin-top:3px; color:grey">
-          <view style='width:80%; font-size:15px'>发布于 {{exp.time_p}}</view>
+          <view style='width:80%; font-size:15px'>发布于 {{exp.time_publish}}</view>
           <view style='text-align:center; font-size:15px'>查看详情</view>
         </view>
         <view class='hr'/>
@@ -39,15 +39,15 @@
           <view>{{exp.e_id}}</view>
         <view class="flex-wrp" style="flex-direction:row; width:100%">
           <view class="flex-wrp" style="flex-direction:column; width:85%">
-            <view wx:if="{{express_station[exp.start]}}" class="bc_s_d">从 {{express_station[exp.start]}} </view>
-            <view wx:else>从 {{exp.start}}</view>
-            <view wx:if="{{destination[exp.dest]}}" class="bc_s_d">到 {{destination[exp.dest]}}</view>
-            <view wx:else>到 {{exp.dest}}</view>
+            <view wx:if="{{express_station[exp.starting]}}" class="bc_s_d">从 {{express_station[exp.starting]}} </view>
+            <view wx:else>从 {{exp.starting}}</view>
+            <view wx:if="{{destination[exp.destination]}}" class="bc_s_d">到 {{destination[exp.destination]}}</view>
+            <view wx:else>到 {{exp.destination}}</view>
           </view>
-          <view class="bc_pay">{{exp.pay}}元</view>
+          <view class="bc_pay">{{exp.payment}}元</view>
         </view>
         <view class="flex-wrp" style="flex-direction:row; margin-top:3px; color:grey">
-          <view style='width:80%; font-size:15px'>发布于 {{exp.time_p}}  代拿于 {{exp.time_t}}</view>
+          <view style='width:80%; font-size:15px'>发布于 {{exp.time_publish}}  代拿于 {{exp.time_take}}</view>
           <view style='text-align:center; font-size:15px'>查看详情</view>
         </view>
         <view class='hr'/>

@@ -1,7 +1,8 @@
 // publish_detail.js
 // 发布的快递的详情，可删除或修改
 
-const app = getApp()
+const app = getApp();
+const express_api = require('../../../api/express.js');
 
 Page({
 
@@ -12,19 +13,26 @@ Page({
   },
 
   onLoad: function (options) {
-    this.setData({
-      id: options.id
+    let that = this;
+    express_api.getExpByID(options._id)
+    .then(exp => {
+      exp = exp[0];
+      that.setData({
+        exp
+      });
     })
-    var that = this
-    wx.request({
-      url: app.globalData.api + '/get_express_d',
-      data: { id: options.id },
-      success: res => {
-        that.setData({
-          exp: res.data
-        })
-      }
-    })
+    .catch(err => {
+      console.log(err);
+      wx.showModal({
+        title: '抱歉',
+        content: '无法获取该快递，请稍后重试',
+        success: function (res) {
+          wx.navigateBack({
+            delta: 1
+          });
+        },
+      });
+    });
   },
 
   confirm: function () {
@@ -35,19 +43,29 @@ Page({
       confirmColor: '#6c0022',
       success: function (res) {
         if (res.confirm) {
-          wx.request({
-            url: app.globalData.api + '/express_confirm', // 修改快递状态
-            method: 'GET',
-            data: { id: that.data.id },
-            success: function () {
-              var _exp = that.data.exp
-              _exp.state = 2
-              that.setData({ exp: _exp })
-            }
+          express_api.editExpStatus(that.data.exp._id, 2)
+          .then(res => {
+            let exp = that.data.exp;
+            exp.state = 2;
+            that.setData({ exp });
           })
+          .catch(err=> {
+            console.log(err);
+            wx.showToast({
+              title: '确认失败，请稍后重试',
+              icon: 'none',
+              duration: 0,
+              mask: true,
+              complete: function(res) {
+                wx.navigateBack({
+                  delta: 1
+                });
+              },
+            });
+          });
         }
       }
-    })
+    });
   },
   
   edit_exp: function () {
@@ -64,26 +82,36 @@ Page({
       confirmColor: '#6c0022',
       success: function (res) {
         if (res.confirm) {
-          wx.request({
-            url: app.globalData.api + '/express_del', // 修改快递状态
-            method: 'GET',
-            data: { id: that.data.exp.id },
-            success: function () {
-              wx.showModal({
-                title: '已删除！',
-                content: '该快递信息已被删除',
-                showCancel: false,
-                confirmColor: '#6c0022',
-                success: function () {
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                }
-              })
-            }
+          express_api.deleteExp(that.data.exp._id)
+          .then(res => {
+            wx.showModal({
+              title: '已删除！',
+              content: '该快递信息已被删除',
+              showCancel: false,
+              confirmColor: '#6c0022',
+              success: function () {
+                wx.navigateBack({
+                  delta: 1
+                });
+              }
+            });
           })
+          .catch(err => {
+            console.log(err);
+            wx.showToast({
+              title: '删除失败，请稍后重试',
+              icon: 'none',
+              duration: 0,
+              mask: true,
+              complete: function (res) {
+                wx.navigateBack({
+                  delta: 1
+                });
+              },
+            });
+          });
         }
       }
-    })
+    });
   }
 })

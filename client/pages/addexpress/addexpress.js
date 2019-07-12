@@ -2,7 +2,8 @@
 // 添加快递的页面
 
 const app = getApp();
-const expressApi = require('../../api/express');
+const express_api = require('../../api/express');
+const user_api = require('../../api/user.js');
 
 Page({
 
@@ -23,26 +24,25 @@ Page({
   },
 
   onLoad: function () {
-    var that = this;
-    // 加载用户默认信息
-    wx.request({
-      url: app.globalData.api + '/add_express',
-      data: {'user_id': app.globalData.user_id},
-      success (res) {
-        if (res.data.stat) that.setData({i: res.data.stat});
-        if (res.data.dest) that.setData({j: res.data.dest});
-        if (res.data.name) that.setData({name: res.data.name});
-        that.setData({
-          tele: res.data.tele,
-          wechat: res.data.wechat,
-          qq: res.data.qq
-        })
-      }
+    let that = this;
+    user_api.getUserByID(app.globalData.user_id)
+    .then(res => {
+      user = res[0];
+      if (user.stat) that.setData({ i: user.stat });
+      if (user.dest) that.setData({ j: user.dest });
+      if (user.name) that.setData({ name: user.name });
+      that.setData({
+        tele: user.tele,
+        wechat: user.wechat,
+        qq: user.qq
+      });
     })
+    .catch(err => {});
   },
 
   publish: function (e) {
     let express = e.detail.value;
+    express.owner_id = app.globalData.user_id;
 
     express.start = this.data.stat_color === 0 ? this.data.i : express.other_start; // 快递站
     express.dest = this.data.dest_color === 0 ? this.data.j : express.other_dest; // 目的地
@@ -78,25 +78,7 @@ Page({
       }
     }
 
-    // 向服务器发送添加快递请求
-    // wx.request({
-    //   url: app.globalData.api + '/add_express',
-    //   method: 'POST',
-    //   data: express,
-    //   success () {
-    //     wx.showModal({
-    //       title: '发布成功',
-    //       content: '成功发布了快递',
-    //       showCancel: false,
-    //       success: function () {
-    //         wx.navigateBack({
-    //           delta: 1
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
-    expressApi.addExp(express)
+    express_api.addExp(express)
       .then((res) => {
         console.log(res);
         wx.showModal({
@@ -106,7 +88,7 @@ Page({
           success: function () { wx.navigateBack({ delta: 1 }); }
         });
       }).catch((error) => {this.publish_fail('发布失败，请稍后重试');});
-  },
+  },   
 
   publish_fail: function (title) {
     wx.showToast({

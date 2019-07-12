@@ -1,7 +1,8 @@
 // take_detail.js
 // 代拿的快递详情
 
-const app = getApp()
+const app = getApp();
+const express_api = require('../../../api/express.js');
 
 Page({
   
@@ -12,19 +13,28 @@ Page({
   },
 
   onLoad: function (options) {
-    this.setData({
-      id: options.id
-    })
-    var that = this
-    wx.request({
-      url: app.globalData.api + '/get_express_d',
-      data: { id: options.id },
-      success: res => {
+    let that = this;
+    express_api.getExpByID(options.id)
+      .then(exp => {
+        exp = exp[0];
         that.setData({
-          exp: res.data
-        })
-      }
-    })
+          exp
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        wx.showToast({
+          title: '无法获取该快递，请稍后重试',
+          icon: 'none',
+          duration: 0,
+          mask: true,
+          complete: function (res) {
+            wx.navigateBack({
+              delta: 1
+            });
+          },
+        });
+      });
   },
 
   confirm: function () {
@@ -35,11 +45,8 @@ Page({
       confirmColor: '#6c0022',
       success: function (res) {
         if (res.confirm) {
-          wx.request({
-            url: app.globalData.api + '/express_confirm', // 修改快递状态
-            method: 'GET',
-            data: { id: that.data.exp.id },
-            success: function () {
+          express_api.deleteExp(that.data.exp._id)
+            .then(res => {
               wx.showModal({
                 title: '已确认！',
                 content: '该快递信息已被删除',
@@ -48,13 +55,26 @@ Page({
                 success: function () {
                   wx.navigateBack({
                     delta: 1
-                  })
+                  });
                 }
-              })
-            }
-          })
+              });
+            })
+            .catch(err => {
+              console.log(err);
+              wx.showToast({
+                title: '确认失败，请稍后重试',
+                icon: 'none',
+                duration: 0,
+                mask: true,
+                complete: function (res) {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                },
+              });
+            });
         }
       }
-    })
+    });
   }
 })

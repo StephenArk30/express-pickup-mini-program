@@ -1,7 +1,8 @@
 // index.js
 // 首页，展示发布的快递，以及添加快递按钮
 
-const app = getApp()
+const app = getApp();
+const express_api = require('../../api/express.js');
 
 Page({
 
@@ -12,22 +13,8 @@ Page({
   },
 
   onShow: function () {
-    var that = this
-    wx.request({
-      url: app.globalData.api + "/get_express",
-      method: 'GET',
-      // 设置请求的 header
-      header: {
-        'Content-Type': 'application/json' // 返回json格式，必须要加
-      },
-      success: function (res) {
-        // console.log("res: ", res.data);
-        that.setData({
-          expresses: res.data // 将返回的数据放在expresses里
-        });
-        // console.log("expresses:", that.data.expresses)
-      }
-    })
+    let that = this;
+    express_api.getAllExp().then(expresses => that.setData({ expresses }));
   },
 
   goToaddExpress: function () {
@@ -37,7 +24,7 @@ Page({
   },
 
   detail: function (e) {
-    console.log(e)
+    // console.log(e)
     // 查看快递
     wx.navigateTo({
       url: '../express-detail/express-detail?id=' + e.currentTarget.id,

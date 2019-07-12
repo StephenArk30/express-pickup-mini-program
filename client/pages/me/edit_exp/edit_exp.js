@@ -1,7 +1,8 @@
 // edit_exp.js
 // 修改快递
 
-const app = getApp()
+const app = getApp();
+const express_api = require('../../../api/express.js');
 
 Page({
 
@@ -29,125 +30,67 @@ Page({
         i: this.data.exp.starting,
         s_state: true,
         stat_color: 0
-      })
+      });
     }
-    if (this.data.destination[this.data.exp.dest]) {
+    if (this.data.destination[this.data.exp.destination]) {
       this.setData({
-        j: this.data.exp.dest,
+        j: this.data.exp.destination,
         d_state: true,
         dest_color: 0
-      })
+      });
     }
   },
 
   publish: function (e) {
-    var that = this
-    var start // 快递站
-    if (e.detail.value.stat == 0) start = this.data.i
-    else start = e.detail.value.other_start // 快递站详细地址
+    let express = e.detail.value;
 
-    var dest // 目的地
-    if (e.detail.value.dest == 0) dest = this.data.j
-    else dest = e.detail.value.other_dest // 详细地址
+    express.start = this.data.stat_color === 0 ? this.data.i : express.other_start; // 快递站
+    express.dest = this.data.dest_color === 0 ? this.data.j : express.other_dest; // 目的地
 
-    var pay = e.detail.value.payment // *感谢金
-    var anoy = e.detail.value.anoy // 是否匿名
-    var owner = e.detail.value.ownername // *收件人
-    var tips = e.detail.value.tips // 简略备注
-    var e_id = e.detail.value.express_id // *快递号
-    var dest_d = e.detail.value.destination_room // 更详细地址
-    var size = e.detail.value.size // 大小
-    var weight = e.detail.value.weight // 重量
-    var tips_d = e.detail.value.tips_detail // 详细备注
-
-    var tele = e.detail.value.tele // 电话
-    var wechat = e.detail.value.wechat // 微信号
-    var qq = e.detail.value.qq // QQ
-
-    if (start.length == 0) {
-      wx.showToast({
-        title: '请填写快递站地址！',
-        icon: 'none'
-      })
+    // 检查输入的合法性
+    if (express.start.length === 0) {
+      this.publish_fail('请填写快递站地址！');
       return;
     }
-    if (dest.length == 0) {
-      wx.showToast({
-        title: '请填写目的地地址！',
-        icon: 'none'
-      })
+    if (express.dest.length === 0) {
+      this.publish_fail('请填写目的地地址！');
       return;
     }
-    if (pay == '' || owner == '' || e_id == '') {
-      wx.showToast({
-        title: '请填写*号内容！',
-        icon: 'none'
-      })
+    if (express.pay === '' || express.owner === '' || express.e_id === '') {
+      this.publish_fail('请填写*号内容！');
       return;
     }
-    if (tele == '' && wechat == '' && qq == '') {
-      wx.showToast({
-        title: '请填写至少一种联系方式！',
-        icon: 'none'
-      })
+    if (express.tele === '' && express.wechat === '' && express.qq === '') {
+      this.publish_fail('请填写至少一种联系方式！');
       return;
     } else {
-      if (tele && tele.length != 11) {
-        wx.showToast({
-          title: '请输入11位手机号！',
-          icon: 'none'
-        })
+      if (express.tele && express.tele.length !== 11) {
+        this.publish_fail('请输入11位手机号！');
         return;
       }
-      if (wechat && (wechat.length < 6 || wechat.length > 20)) {
-        wx.showToast({
-          title: '请输入5~20位微信号！',
-          icon: 'none'
-        })
+      if (express.wechat && (express.wechat.length < 6 || express.wechat.length > 20)) {
+        this.publish_fail('请输入5~20位微信号！');
         return;
       }
-      if (qq && qq.length < 5) {
-        wx.showToast({
-          title: '请输入至少5位QQ号！',
-          icon: 'none'
-        })
+      if (express.qq && express.qq.length < 5) {
+        this.publish_fail('请输入至少5位QQ号！');
         return;
       }
     }
 
-    wx.request({
-      url: app.globalData.api + '/edit_express',
-      method: 'POST',
-      data: {
-        id: that.data.exp.id,
-        start: start,
-        dest: dest,
-        pay: pay,
-        anoy: anoy,
-        owner: owner,
-        tips: tips,
-        e_id: e_id,
-        dest_d: dest_d,
-        size: size,
-        weight: weight,
-        tips_d: tips_d,
-        tele: tele,
-        wechat: wechat,
-        qq: qq
-      },
-      success() {
-        wx.showModal({
-          title: '修改成功',
-          content: '成功修改了快递',
-          showCancel: false,
-          success: function () {
-            wx.navigateBack({
-              delta: 1
-            })
-          }
-        })
-      }
-    })
+    express_api.editExp(this.data.exp._id, express)
+    .then(res => {
+      wx.showModal({
+        title: '修改成功',
+        content: '成功修改了快递',
+        showCancel: false,
+        success: function () {
+          wx.navigateBack({
+            delta: 1
+          });
+        }
+      });
+    });
   },
 
   e_s_Change: function (e) {

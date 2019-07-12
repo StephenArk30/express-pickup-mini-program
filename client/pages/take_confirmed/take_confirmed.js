@@ -15,6 +15,6 @@ Page({
     console.log(options)
     this.setData({
       exp: JSON.parse(options.exp),
-    })
+    });
   },
 })

@@ -2,6 +2,7 @@
 // 注册
 
 const app = getApp()
+const user_api = require('../../api/user.js');
 
 Page({
 
@@ -40,36 +41,24 @@ Page({
       return;
     }
 
-    // 数据发送至后台
-    var url = app.globalData.api + "/register";
-    wx.request({
-      url: url,
-      method: 'POST',
-      data: {
-        wechat_id: app.globalData.open_id,
-        school: school,
-        card_id: card_id,
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data);
-        if(res.data.have_res) {
-          wx.showToast({
-            title: '该学号已存在！',
-            icon: 'none'
-          })
-          return;
-        }
-        else{
-            app.globalData.user_id = res.data.user_id
-            wx.switchTab({
-              url: '../index/index',
-            })
-        }
-      }
+    user_api.addUser({
+      school: school,
+      card_id: card_id,
     })
+    .then(res => {
+      console.log(res);
+      app.globalData.user_id = res._id
+      wx.switchTab({
+        url: '../index/index',
+      })
+    })
+    .catch(err => {
+      console.log(err);
+      wx.showToast({
+        title: '该学号已存在！',
+        icon: 'none'
+      });
+    });
   },
 
   bindPickerChange: function (e) {

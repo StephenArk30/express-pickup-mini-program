@@ -1,1 +1,16 @@
 /* pages/me/publish_detail/publish_detail.wxss */
+
+.confirm_panel {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 30rpx 0;
+}
+
+.tips {
+  width: 100%;
+  text-align: center;
+  margin: 15rpx 0;
+  color: #6c0022;
+}
